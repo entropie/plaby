@@ -19,7 +19,7 @@ module Plaby
 
   class Writer
 
-    Template = File.join(Source, "src", "plaby.html")
+    Template = File.join(Source, "src", "plaby.haml")
 
     attr_reader :blogs
 
@@ -28,7 +28,7 @@ module Plaby
     end
 
     def template
-      @template ||= File.readlines(Template).join
+      @template ||= Haml::Engine.new(File.readlines(Template).join).render
     end
 
     def write_digest(n = NumbersOfPosts)
@@ -37,7 +37,7 @@ module Plaby
         cnt << write(post)
         cnt << "\n"
       end
-      template.gsub(/%%%%CONTENT%%%%/, cnt)
+      template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
     def write(post)

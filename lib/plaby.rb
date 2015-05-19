@@ -34,7 +34,7 @@ module Plaby
   TEMPLATE = File.join(Source, "template")
   DEFAULT_TEMPLATE = "default"
 
-  NumbersOfPosts = 10
+  NumbersOfPosts = 20
 
   require "#{Source}/lib/plaby/config"
   require "#{Source}/lib/plaby/fetcher"

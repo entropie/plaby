@@ -54,6 +54,14 @@ module Plaby
         @blog.language
       end
 
+      def author
+        @values["author"]
+      end
+
+      def author_with_link
+        "<a href=\"#{url}\">#{author}</a>"
+      end
+
       def title
         @values["title"]
       end
