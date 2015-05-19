@@ -17,11 +17,24 @@ module Plaby
     end
   end
 
+  module BlogLinkWriter
+
+    def template
+      File.readlines(File.join(TEMPLATE,DEFAULT_TEMPLATE, "bloglink.haml")).join
+    end
+
+    def to_html
+      tmp = Haml::Engine.new(template).render
+      Mustache.render(tmp,self)
+    end
+  end
+
   class Writer
 
     Template = File.join(TEMPLATE, DEFAULT_TEMPLATE, "plaby.haml")
 
     attr_reader :blogs
+    
 
     def initialize(blogs)
       @blogs = blogs
@@ -31,13 +44,30 @@ module Plaby
       @template ||= Haml::Engine.new(File.readlines(Template).join).render
     end
 
-    def write_digest(n = NumbersOfPosts)
+    def do_digest(n = 10)
       cnt = ""
       @blogs.posts.first(n).each do |post|
         cnt << write(post)
         cnt << "\n"
       end
-      template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
+      cnt
+    end
+
+    def do_blogs
+      blog_html = "<aside><ul>"
+      @blogs.each do |blog|
+        blog_html << blog.extend(BlogLinkWriter).to_html
+      end
+      blog_html << "</ul></aside>"
+
+    end
+
+    def generate(rssposts_count = 10)
+
+      cnt = do_digest(rssposts_count) 
+      cnt <<  do_blogs
+      newfile = template.gsub(/%%%%CONTENT%%%%/, cnt)
+
     end
 
     def write(post)

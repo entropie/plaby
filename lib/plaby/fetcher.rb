@@ -9,6 +9,7 @@ module Plaby
   class Blog
 
     attr_reader :identifier, :values
+    attr_reader :title, :link
 
     attr_accessor :entries
 
@@ -21,11 +22,18 @@ module Plaby
       @values[:url]
     end
 
+    def image 
+      @values[:image]
+    end
+
     def read
       @entries = Entries.new
-      Feedjira::Feed.fetch_and_parse(url).entries.each do |a|
+      feed =  Feedjira::Feed.fetch_and_parse(url)
+      feed.entries.each do |a|
         @entries << Entry.new(self, a)
       end
+      @title = feed.title
+      @link = feed.url
     end
 
     def inspect
