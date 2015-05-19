@@ -12,8 +12,6 @@ module Plaby
 
     attr_accessor :entries
 
-    NumbersOfPosts = 10
-
     def initialize(ident, values)
       @identifier = ident
       @values = values
@@ -23,7 +21,7 @@ module Plaby
       @values[:url]
     end
 
-    def read(limit = NumbersOfPosts)
+    def read
       @entries = Entries.new
       Feedjira::Feed.fetch_and_parse(url).entries.each do |a|
         @entries << Entry.new(self, a)
@@ -32,6 +30,14 @@ module Plaby
 
     def inspect
       "#{@identifier}: #{@entries.size}"
+    end
+
+    def config
+      Plaby.config[:blogs][@identifier]
+    end
+
+    def language
+      config[:lang]
     end
 
 
@@ -44,6 +50,14 @@ module Plaby
         @values = hsh
       end
 
+      def lang
+        @blog.language
+      end
+
+      def title
+        @values["title"]
+      end
+
       def url
         @values["url"]
       end
@@ -52,12 +66,16 @@ module Plaby
         @values.send(*m)
       end
 
+      def summary
+        @values["summary"]
+      end
+
       def published
         @values.published.to_time
       end
 
       def date
-        @values.published.to_time
+        @values.published.to_time.strftime("%A, %e%b%Y")
       end
 
       def filename

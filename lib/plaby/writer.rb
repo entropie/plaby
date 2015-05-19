@@ -7,12 +7,13 @@ module Plaby
 
   module EntryWriter
 
+    def template
+      File.readlines(File.join(TEMPLATE, DEFAULT_TEMPLATE, "post.haml")).join
+    end
+
     def to_html
-      str = "<div class=\"entry\"><h2><a href=\"#{ url }\">#{title}</a></h2>"
-      str << "<div class=\"date\">#{published}</div>"
-      cont = TidyFFI::Tidy.with_options(:show_body_only => 1).new(summary).clean
-      str << "<div class=\"content\">" << cont << "</div></div>"
-      str
+      tmp = Haml::Engine.new(template).render
+      Mustache.render(tmp, self)
     end
   end
 
@@ -24,25 +25,19 @@ module Plaby
 
     def initialize(blogs)
       @blogs = blogs
-      # fetcher.each_post.each do |post|
-      #   puts post.filename
-      # end
     end
 
     def template
       @template ||= File.readlines(Template).join
     end
 
-    def write_digest(n = 10)
+    def write_digest(n = NumbersOfPosts)
       cnt = ""
       @blogs.posts.first(n).each do |post|
         cnt << write(post)
         cnt << "\n"
       end
-
-      newfile = template.gsub(/%%%%CONTENT%%%%/, cnt)
-
-      puts newfile
+      template.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
     def write(post)

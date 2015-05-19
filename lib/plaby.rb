@@ -30,6 +30,12 @@ module Plaby
 
   HTDOCS = "~/public_html/plaby"
 
+
+  TEMPLATE = File.join(Source, "template")
+  DEFAULT_TEMPLATE = "default"
+
+  NumbersOfPosts = 10
+
   require "#{Source}/lib/plaby/config"
   require "#{Source}/lib/plaby/fetcher"
   require "#{Source}/lib/plaby/writer"
@@ -41,7 +47,10 @@ module Plaby
   @config = Config.new(config)
 
   f = Fetcher.read(@config[:blogs]).fetch!
-  Writer.new(f).write_digest
+  str = Writer.new(f).write_digest
+
+  File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end
+  system "cd #{Source} && sass src/screen.sass > htdocs/css/screen.css"
 end
 
 
