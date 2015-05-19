@@ -50,7 +50,7 @@ module Plaby
   str = Writer.new(f).write_digest
 
   File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end
-  system "cd #{Source} && sass src/screen.sass > htdocs/css/screen.css"
+  system "cd #{Source} && sass template/default/screen.sass > htdocs/css/screen.css"
 end
 
 

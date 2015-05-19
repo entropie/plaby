@@ -19,7 +19,7 @@ module Plaby
 
   class Writer
 
-    Template = File.join(Source, "src", "plaby.haml")
+    Template = File.join(TEMPLATE, DEFAULT_TEMPLATE, "plaby.haml")
 
     attr_reader :blogs
 
