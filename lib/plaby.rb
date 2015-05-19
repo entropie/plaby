@@ -28,6 +28,8 @@ module Plaby
 
   DefaultConfig = "~/.plaby.yaml"
 
+  HTDOCS = "~/public_html/plaby"
+
   require "#{Source}/lib/plaby/config"
   require "#{Source}/lib/plaby/fetcher"
   require "#{Source}/lib/plaby/writer"
@@ -39,7 +41,7 @@ module Plaby
   @config = Config.new(config)
 
   f = Fetcher.read(@config[:blogs]).fetch!
-  Writer.new(f)
+  Writer.new(f).write_digest
 end
 
 

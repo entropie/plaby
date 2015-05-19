@@ -43,9 +43,13 @@ module Plaby
         @blog = blog
         @values = hsh
       end
-      
+
       def url
         @values["url"]
+      end
+
+      def method_missing(*m)
+        @values.send(*m)
       end
 
       def published
@@ -59,19 +63,19 @@ module Plaby
       def filename
         @filename ||= date.strftime(PostFormat).
           gsub(/\(identifier\)/, @blog.identifier).
-          gsub(/\(title\)/, @values.title.slug!.downcase).
+          gsub(/\(title\)/, @values.title.downcase).
           gsub(/\?/, '').
-          gsub(/\'/, '').
-          gsub(/\'/, '').
           gsub(/\:/, '').
           gsub(/\;/, '').
           gsub(/\,/, '').
-          gsub(/\„/, '').
-          gsub(/\“/, '').
+          gsub(/„/, '').
+          gsub(/“/, '').
           gsub(/[äöüÖÄÜ]/, '').
+          gsub(/\!/, '').
           gsub(/\(/, '').
+          gsub(/'/, '').
           gsub(/\)/, '').
-          gsub(/\!/, '')
+          slug!
       end
     end
   end
@@ -82,12 +86,17 @@ module Plaby
       select{ |c| c.identifier == obj}.first
     end
 
-    def each_post
+    def all_posts
       posts = []
       each do |c|
         posts.push(*c.entries)
       end
       posts.sort_by{ |post| post.date }.reverse
+    end
+
+
+    def posts
+      @posts ||= all_posts
     end
   end
 
