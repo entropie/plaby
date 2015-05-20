@@ -8,7 +8,7 @@ module Plaby
   module EntryWriter
 
     def template
-      File.readlines(File.join(TEMPLATE, DEFAULT_TEMPLATE, "post.haml")).join
+      File.readlines(Plaby::T("post.haml")).join
     end
 
     def to_html
@@ -19,8 +19,6 @@ module Plaby
 
   class Writer
 
-    Template = File.join(TEMPLATE, DEFAULT_TEMPLATE, "plaby.haml")
-
     attr_reader :blogs
 
     def initialize(blogs)
@@ -28,14 +26,12 @@ module Plaby
     end
 
     def template
-      @template ||= Haml::Engine.new(File.readlines(Template).join).render
+      @template ||= Haml::Engine.new(File.readlines(Plaby::T("plaby.haml")).join).render
     end
 
     def write_digest(n = NumbersOfPosts)
-      cnt = ""
-      @blogs.posts.first(n).each do |post|
-        cnt << write(post)
-        cnt << "\n"
+      cnt = @blogs.posts.first(n).inject("") do |m, post|
+        m << write(post)
       end
       template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end

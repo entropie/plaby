@@ -36,21 +36,28 @@ module Plaby
 
   NumbersOfPosts = 20
 
-  require "#{Source}/lib/plaby/config"
-  require "#{Source}/lib/plaby/fetcher"
-  require "#{Source}/lib/plaby/writer"
+
+  def self.T(file)
+    File.join(TEMPLATE, DEFAULT_TEMPLATE, file)
+  end
 
   def self.config
     @config || DefaultConfig
   end
 
+  %W'config fetcher writer'.each do |cfg|
+    require "#{Source}/lib/plaby/#{cfg}"
+  end
+
   @config = Config.new(config)
 
+  # TODO: from here on
   f = Fetcher.read(@config[:blogs]).fetch!
   str = Writer.new(f).write_digest
 
   File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end
   system "cd #{Source} && sass template/default/screen.sass > htdocs/css/screen.css"
+
 end
 
 
