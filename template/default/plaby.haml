@@ -1,19 +1,25 @@
 !!! 5
+%html
+  %head
+    %title your mom
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:300', :rel => 'stylesheet', :type => 'text/css'}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "css/screen.css"}
+    %link{:rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"}
+    %link{:rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"}
+  %body
+    %header.container
+      %h1 Planet Dog Blogs
 
-%head
-  %title your mom
-  %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
-  %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:300', :rel => 'stylesheet', :type => 'text/css'}
-  %link{:rel => "stylesheet", :type => "text/css", :href => "css/screen.css"}
-%body
+    #content.container
+      .row
+        .col-md-8
+          :plain
+            %%%%CONTENT%%%%
 
-  #body
-    :plain
-      %%%%CONTENT%%%%
-
-  %aside.bloglinks
-    %nav
-      :plain
-        %%%%BLOGLINKS%%%%
-  #footer
-    asdf
+        %aside.bloglinks.col-md-4
+          %nav
+            :plain
+              %%%%BLOGLINKS%%%%
+    %footer.container
+      Thank you for using - have fun
