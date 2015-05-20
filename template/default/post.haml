@@ -1,7 +1,10 @@
 .pl-entry{:lang => "{{ lang }}"}
-  .pl-box
-    %h2.pl-topic
-      .lang{:lang => "{{ lang }}"}
-      %a{:href => "{{url}}"} {{ title }}
-    .pl-date {{ date }}
-    .pl-content {{{ summary }}}
+  .pl-box.panel.panel-default
+    .panel-heading
+
+      %h2.pl-topic.panel-title
+        .lang{:lang => "{{ lang }}"}
+        %a{:href => "{{url}}"} {{ title }}
+      .pl-date.label.label-default {{ date }}
+    .panel-body
+      .pl-content {{{ summary }}}
