@@ -46,7 +46,7 @@ module Plaby
       cnt = @blogs.posts.first(n).inject("") do |m, post|
         m << write(post)
       end
-      cnt
+      template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
     def do_blogs
