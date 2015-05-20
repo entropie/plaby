@@ -20,7 +20,7 @@ module Plaby
   module BlogLinkWriter
 
     def template
-      File.readlines(File.join(TEMPLATE,DEFAULT_TEMPLATE, "bloglink.haml")).join
+      File.readlines(Plaby::T("bloglink.haml")).join
     end
 
     def to_html
@@ -49,21 +49,13 @@ module Plaby
       template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
-    def do_blogs
-      blog_html = "<aside><ul>"
+    def write_blogslinks
+      blog_html = "<ul>"
       @blogs.each do |blog|
         blog_html << blog.extend(BlogLinkWriter).to_html
       end
-      blog_html << "</ul></aside>"
-
-    end
-
-    def generate(rssposts_count = 10)
-
-      cnt = do_digest(rssposts_count)
-      cnt <<  do_blogs
-      newfile = template.gsub(/%%%%CONTENT%%%%/, cnt)
-
+      blog_html << "</ul>"
+      template.dup.gsub(/%%%%BOGLINKS%%%%/,blog_html)
     end
 
     def write(post)
