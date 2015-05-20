@@ -34,7 +34,7 @@ module Plaby
     Template = File.join(TEMPLATE, DEFAULT_TEMPLATE, "plaby.haml")
 
     attr_reader :blogs
-    
+
 
     def initialize(blogs)
       @blogs = blogs
