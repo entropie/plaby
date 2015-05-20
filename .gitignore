@@ -1,4 +1,4 @@
 Gemfile.lock
 .sass-cache
 htdocs/css/*
-htdocs/index.html
+htdocs/*.html

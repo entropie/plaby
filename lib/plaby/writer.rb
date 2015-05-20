@@ -8,7 +8,7 @@ module Plaby
   module EntryWriter
 
     def template
-      File.readlines(File.join(TEMPLATE, DEFAULT_TEMPLATE, "post.haml")).join
+      File.readlines(Plaby::T("post.haml")).join
     end
 
     def to_html
@@ -31,8 +31,6 @@ module Plaby
 
   class Writer
 
-    Template = File.join(TEMPLATE, DEFAULT_TEMPLATE, "plaby.haml")
-
     attr_reader :blogs
 
 
@@ -41,14 +39,12 @@ module Plaby
     end
 
     def template
-      @template ||= Haml::Engine.new(File.readlines(Template).join).render
+      @template ||= Haml::Engine.new(File.readlines(Plaby::T("plaby.haml")).join).render
     end
 
-    def do_digest(n = 10)
-      cnt = ""
-      @blogs.posts.first(n).each do |post|
-        cnt << write(post)
-        cnt << "\n"
+    def write_digest(n = NumbersOfPosts)
+      cnt = @blogs.posts.first(n).inject("") do |m, post|
+        m << write(post)
       end
       cnt
     end
@@ -64,7 +60,7 @@ module Plaby
 
     def generate(rssposts_count = 10)
 
-      cnt = do_digest(rssposts_count) 
+      cnt = do_digest(rssposts_count)
       cnt <<  do_blogs
       newfile = template.gsub(/%%%%CONTENT%%%%/, cnt)
 
@@ -85,4 +81,3 @@ Local Variables:
   ruby-indent-level:2
 End:
 =end
-
