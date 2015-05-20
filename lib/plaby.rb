@@ -53,7 +53,10 @@ module Plaby
 
   # TODO: from here on
   f = Fetcher.read(@config[:blogs]).fetch!
-  str = Writer.new(f).write_digest
+  writer = Writer.new(f)
+  writer.write_digest
+  writer.write_bloglinks
+  str = writer.to_html
 
   File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end
   system "cd #{Source} && sass template/default/screen.sass > htdocs/css/screen.css"

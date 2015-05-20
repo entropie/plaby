@@ -22,7 +22,7 @@ module Plaby
       @values[:url]
     end
 
-    def image 
+    def image
       @values[:image]
     end
 
@@ -128,6 +128,9 @@ module Plaby
       posts.sort_by{ |post| post.date }.reverse
     end
 
+    def blogs
+      self
+    end
 
     def posts
       @posts ||= all_posts

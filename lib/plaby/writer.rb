@@ -20,12 +20,12 @@ module Plaby
   module BlogLinkWriter
 
     def template
-      File.readlines(Plaby::T("bloglink.haml")).join
+      File.readlines(Plaby::T("bloglinks.haml")).join
     end
 
     def to_html
-      tmp = Haml::Engine.new(template).render
-      Mustache.render(tmp,self)
+      tmp = Mustache.render(template,self)
+      Haml::Engine.new(tmp).render
     end
   end
 
@@ -36,6 +36,7 @@ module Plaby
 
     def initialize(blogs)
       @blogs = blogs
+      @html = template
     end
 
     def template
@@ -46,21 +47,22 @@ module Plaby
       cnt = @blogs.posts.first(n).inject("") do |m, post|
         m << write(post)
       end
-      template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
+      @html = @html.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
-    def write_blogslinks
-      blog_html = "<ul>"
-      @blogs.each do |blog|
-        blog_html << blog.extend(BlogLinkWriter).to_html
-      end
-      blog_html << "</ul>"
-      template.dup.gsub(/%%%%BOGLINKS%%%%/,blog_html)
+    def write_bloglinks
+      blog_html = @blogs.extend(BlogLinkWriter).to_html
+      @html = @html.dup.gsub(/%%%%BLOGLINKS%%%%/,blog_html)
     end
 
     def write(post)
       post.extend(EntryWriter).to_html
     end
+
+    def to_html
+      @html
+    end
+
   end
 
 end
