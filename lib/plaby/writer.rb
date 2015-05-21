@@ -22,6 +22,16 @@ module Plaby
       end
     end
 
+    module Template
+
+      def template_file; "plaby.haml"; end
+
+      def to_html
+        tmp = Haml::Engine.new(template).render
+        Mustache.render(tmp, self.content)
+      end
+    end
+
     module Entry
 
       def template_file; "post.haml"; end
@@ -46,17 +56,18 @@ module Plaby
 
   class Writer
 
-    attr_reader :blogs
+    attr_reader :blogs, :content
 
 
     def initialize(blogs, &blk)
       @blogs = blogs
+      @content = {  }
       chain(&blk) if block_given?
       self
     end
 
     def clear!
-      @html = template
+      @content = {  }
     end
 
     def template
@@ -68,18 +79,21 @@ module Plaby
         debug "Post: %s" % post.url
         m << write(post)
       end
-      @html.gsub!(/%%%%CONTENT%%%%/, cnt)
+      @content[:posts] = cnt
+      # @html.gsub!(/%%%%CONTENT%%%%/, cnt)
     end
 
     def make_blogroll
-      blog_html = Writers.with(@blogs, :blogroll).to_html
-      @html.gsub!(/%%%%BLOGLINKS%%%%/, blog_html)
+      str = ""
+      str = Writers.with(@blogs, :blogroll).to_html
+      # @html.gsub!(/%%%%BLOGLINKS%%%%/, blog_html)
     rescue Errno::ENOENT
       # templates should be very dynamic and basicially easy to use (and
       # extendable if you feel the need to). There is no need to have
       # a bloglinks file if you dont want the blog roll. So we quietly
       # remove the placeholder if there is no file.
-      @html.gsub!(/%%%%BLOGLINKS%%%%/, "")
+    ensure
+      @content[:blogroll] = str
     end
 
     def chain(&blk)
@@ -93,7 +107,7 @@ module Plaby
     end
 
     def to_html
-      @html
+      Writers.with(self, :template).to_html
     end
 
   end
