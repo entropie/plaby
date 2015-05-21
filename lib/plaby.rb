@@ -51,7 +51,9 @@ module Plaby
 
   @config = Config.new(config)
 
-  # TODO: from here on
+  # TODO: from here on everything is basically a workaround before we
+  # introduce a real cli interface. No need now, because we dont have
+  # options and stuff
   f = Fetcher.read(@config[:blogs]).fetch!
   str = Writer.new(f) { |w|
     w.write_digest

@@ -73,7 +73,13 @@ module Plaby
 
     def write_bloglinks
       blog_html = Writers.with(@blogs, :blogroll).to_html
-      @html = @html.dup.gsub(/%%%%BLOGLINKS%%%%/, blog_html)
+      @html.gsub!(/%%%%BLOGLINKS%%%%/, blog_html)
+    rescue Errno::ENOENT
+      # templates should be very dynamic and basicially easy to use (and
+      # extendable if you feel the need to). There is no need to have
+      # a bloglinks file if you dont want the blog roll. So we quietly
+      # remove the placeholder if there is no file.
+      @html.gsub!(/%%%%BLOGLINKS%%%%/, "")
     end
 
     def chain(&blk)
