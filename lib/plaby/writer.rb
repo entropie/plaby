@@ -68,7 +68,7 @@ module Plaby
         debug "Post: %s" % post.url
         m << write(post)
       end
-      @html = @html.dup.gsub(/%%%%CONTENT%%%%/, cnt)
+      @html.gsub!(/%%%%CONTENT%%%%/, cnt)
     end
 
     def make_blogroll
