@@ -28,7 +28,7 @@ module Plaby
 
   DefaultConfig = "~/.plaby.yaml"
 
-  HTDOCS = "~/public_html/plaby"
+  HTDOCS = "htdocs"
 
 
   TEMPLATE = File.join(Source, "template")
@@ -51,6 +51,9 @@ module Plaby
 
   @config = Config.new(config)
 
+  @htdocs_path = @config.config.has_key?(:htdocs_path) ? @config[:htdocs_path] : HTDOCS
+
+
   # TODO: from here on
   f = Fetcher.read(@config[:blogs]).fetch!
   writer = Writer.new(f)
@@ -58,8 +61,8 @@ module Plaby
   writer.write_bloglinks
   str = writer.to_html
 
-  File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end
-  system "cd #{Source} && sass template/default/screen.sass > htdocs/css/screen.css"
+  File.open(File.join(@htdocs_path,"index.html"), "w+") do |fp| fp.puts(str) end
+  system "cd #{Source} && sass template/default/screen.sass > #{@htdocs_path}/css/screen.css"
 
 end
 
