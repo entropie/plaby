@@ -56,8 +56,8 @@ module Plaby
   # options and stuff
   f = Fetcher.read(@config[:blogs]).fetch!
   str = Writer.new(f) { |w|
-    w.write_digest
-    w.write_bloglinks
+    w.make_digest
+    w.make_blogroll
   }.to_html
 
   File.open(File.join(Source, "htdocs", "index.html"), "w+") do |fp| fp.puts(str) end

@@ -63,7 +63,7 @@ module Plaby
       @template ||= Haml::Engine.new(File.readlines(Plaby::T("plaby.haml")).join).render
     end
 
-    def write_digest(n = NumbersOfPosts)
+    def make_digest(n = NumbersOfPosts)
       cnt = @blogs.posts.first(n).inject("") do |m, post|
         debug "Post: %s" % post.url
         m << write(post)
@@ -71,7 +71,7 @@ module Plaby
       @html = @html.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
-    def write_bloglinks
+    def make_blogroll
       blog_html = Writers.with(@blogs, :blogroll).to_html
       @html.gsub!(/%%%%BLOGLINKS%%%%/, blog_html)
     rescue Errno::ENOENT
