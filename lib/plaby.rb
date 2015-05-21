@@ -37,8 +37,8 @@ module Plaby
   NumbersOfPosts = 20
 
 
-  def self.T(file)
-    File.join(TEMPLATE, DEFAULT_TEMPLATE, file)
+  def self.T(*frags)
+    File.join(TEMPLATE, DEFAULT_TEMPLATE, *frags)
   end
 
   def self.config

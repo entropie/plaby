@@ -31,6 +31,7 @@ module Plaby
 
     def write_digest(n = NumbersOfPosts)
       cnt = @blogs.posts.first(n).inject("") do |m, post|
+        puts post.url
         m << write(post)
       end
       template.dup.gsub(/%%%%CONTENT%%%%/, cnt)
