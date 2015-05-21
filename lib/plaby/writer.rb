@@ -5,29 +5,44 @@
 
 module Plaby
 
-  module EntryWriter
+  module Writers
 
-    def template
-      File.readlines(Plaby::T("post.haml")).join
+    def self.with(obj, const)
+      obj.extend(TemplateFile).extend(self[const])
     end
 
-    def to_html
-      tmp = Haml::Engine.new(template).render
-      Mustache.render(tmp, self)
+    def self.[](const)
+      const_get(const.to_s.capitalize)
+    end
+
+
+    module TemplateFile
+      def template
+        File.readlines(Plaby::T(template_file)).join
+      end
+    end
+
+    module Entry
+
+      def template_file; "post.haml"; end
+
+      def to_html
+        tmp = Haml::Engine.new(template).render
+        Mustache.render(tmp, self)
+      end
+    end
+
+    module Blogroll
+
+      def template_file; "bloglinks.haml"; end
+
+      def to_html
+        tmp = Mustache.render(template, self)
+        Haml::Engine.new(tmp).render
+      end
     end
   end
 
-  module BlogLinkWriter
-
-    def template
-      File.readlines(Plaby::T("bloglinks.haml")).join
-    end
-
-    def to_html
-      tmp = Mustache.render(template,self)
-      Haml::Engine.new(tmp).render
-    end
-  end
 
   class Writer
 
@@ -35,8 +50,7 @@ module Plaby
 
 
     def initialize(blogs)
-      @blogs = blogs
-      @html = template
+      @blogs, @html = blogs, template
     end
 
     def template
@@ -45,19 +59,19 @@ module Plaby
 
     def write_digest(n = NumbersOfPosts)
       cnt = @blogs.posts.first(n).inject("") do |m, post|
-        puts post.url
+        debug "Post: %s" % post.url
         m << write(post)
       end
       @html = @html.dup.gsub(/%%%%CONTENT%%%%/, cnt)
     end
 
     def write_bloglinks
-      blog_html = @blogs.extend(BlogLinkWriter).to_html
-      @html = @html.dup.gsub(/%%%%BLOGLINKS%%%%/,blog_html)
+      blog_html = Writers.with(@blogs, :blogroll).to_html
+      @html = @html.dup.gsub(/%%%%BLOGLINKS%%%%/, blog_html)
     end
 
     def write(post)
-      post.extend(EntryWriter).to_html
+      Writers.with(post, :entry).to_html
     end
 
     def to_html

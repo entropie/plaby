@@ -93,24 +93,6 @@ module Plaby
       def date
         @values.published.to_time.strftime("%A, %e%b%Y")
       end
-
-      def filename
-        @filename ||= date.strftime(PostFormat).
-          gsub(/\(identifier\)/, @blog.identifier).
-          gsub(/\(title\)/, @values.title.downcase).
-          gsub(/\?/, '').
-          gsub(/\:/, '').
-          gsub(/\;/, '').
-          gsub(/\,/, '').
-          gsub(/„/, '').
-          gsub(/“/, '').
-          gsub(/[äöüÖÄÜ]/, '').
-          gsub(/\!/, '').
-          gsub(/\(/, '').
-          gsub(/'/, '').
-          gsub(/\)/, '').
-          slug!
-      end
     end
   end
 
