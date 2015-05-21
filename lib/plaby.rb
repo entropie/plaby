@@ -71,7 +71,7 @@ module Plaby
   end
 
   @config = Config.new(config)
-  @htdocs_path = @config.config.has_key?(:htdocs_path) ? @config[:htdocs_path] : HTDOCS
+  @htdocs_path =  @config[:htdocs_path] || HTDOCS
 
   setup
 
