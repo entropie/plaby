@@ -45,6 +45,10 @@ module Plaby
     @config || DefaultConfig
   end
 
+  def self.htdocs_path
+    @htdocs_path
+  end
+
   %W'config fetcher writer'.each do |cfg|
     require "#{Source}/lib/plaby/#{cfg}"
   end
