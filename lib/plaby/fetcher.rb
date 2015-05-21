@@ -121,27 +121,30 @@ module Plaby
 
   module Fetcher
 
-    def blogs
-      @@blogs
+    def self.blogs=(bs)
+      @blogs = bs
     end
-    module_function :blogs
+
+    def self.blogs
+      @blogs
+    end
 
     def self.read(blogs)
-      @@blogs = Blogs.new
+      self.blogs = Blogs.new
       blogs.each_pair { |ident, values|
-        @@blogs << Blog.new(ident, values)
+        self.blogs << Blog.new(ident, values)
       }
       self
     end
 
     def self.fetch!
       blogs.each do |b|
-        b.read()
+        b.read
       end
     end
 
     def self.to_a
-      @@blogs
+      blogs
     end
   end
 
