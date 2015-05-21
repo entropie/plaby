@@ -2,3 +2,4 @@ Gemfile.lock
 .sass-cache
 htdocs/css/*
 htdocs/*.html
+htdocs/images/*.*

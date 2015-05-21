@@ -13,6 +13,7 @@ module Plaby
     Defaults = {
       :planet => "Planet Dogs",
       :bum => "batz",
+      :htdocs_path => 'htdocs',
       :blogs => {
         "hundeprofil" => {
           :url => "http://hundeprofil.de/feed/",
