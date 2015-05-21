@@ -9,6 +9,9 @@ module Plaby
   class Blog
 
     attr_reader :identifier, :values, :title, :link
+
+    attr_reader :identifier, :values, :title, :link, :description
+
     attr_accessor :entries
 
     def initialize(ident, values)
@@ -21,7 +24,11 @@ module Plaby
     end
 
     def image
-      @values[:image]
+      if get_image
+        return image_path
+      else
+        "images/blog-placeholder.jpg"
+      end
     end
 
     def read
@@ -32,6 +39,7 @@ module Plaby
       end
       @title = feed.title
       @link = feed.url
+      @description = feed.description
     end
 
     def inspect
@@ -46,6 +54,25 @@ module Plaby
       config[:lang]
     end
 
+    protected
+
+      def image_path
+        title_slug = @identifier.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        "images/blog-avatar-#{title_slug}.jpg"
+      end
+
+      def get_image
+        # first try local copy
+          open(Plaby.htdocs_path + "/" + image_path).read
+      rescue
+          # if opening of local copy failed download it and save it as local copy
+          image_file = open(@values[:image]).read
+          open(Plaby.htdocs_path + "/" + image_path,"w") do |f|
+            # write it to local copy
+            f.puts(image_file)
+          end
+      end
+
 
     class Entries < Array
     end
@@ -54,6 +81,10 @@ module Plaby
       def initialize(blog, hsh)
         @blog = blog
         @values = hsh
+      end
+
+      def blog
+        @blog
       end
 
       def lang
