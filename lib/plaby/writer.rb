@@ -17,39 +17,30 @@ module Plaby
 
 
     module TemplateFile
+      def template_data; self; end
+
       def template
         File.readlines(Plaby::T(template_file)).join
+      end
+
+      def to_html
+        html = Haml::Engine.new(template).render
+        Mustache.render(html, template_data)
       end
     end
 
     module Template
-
       def template_file; "plaby.haml"; end
-
-      def to_html
-        tmp = Haml::Engine.new(template).render
-        Mustache.render(tmp, self.content)
-      end
+      def template_data; self.content; end
     end
 
     module Entry
-
       def template_file; "post.haml"; end
-
-      def to_html
-        tmp = Haml::Engine.new(template).render
-        Mustache.render(tmp, self)
-      end
+      def template_data; self; end
     end
 
     module Blogroll
-
       def template_file; "bloglinks.haml"; end
-
-      def to_html
-        tmp = Mustache.render(template, self)
-        Haml::Engine.new(tmp).render
-      end
     end
   end
 
