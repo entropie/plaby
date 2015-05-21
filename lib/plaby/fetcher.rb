@@ -8,9 +8,7 @@ module Plaby
 
   class Blog
 
-    attr_reader :identifier, :values
-    attr_reader :title, :link
-
+    attr_reader :identifier, :values, :title, :link
     attr_accessor :entries
 
     def initialize(ident, values)
