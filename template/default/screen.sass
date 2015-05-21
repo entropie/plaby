@@ -6,6 +6,17 @@ body
 .popover
   display: block
   position: relative
+  border-color: rgba(0, 0, 0, 0.07)
+  box-shadow: none
+  &.left > .arrow
+    border-left-color: rgba(0, 0, 0, 0.07)
+
+  .popover-content
+    -moz-hyphens: auto
+    -o-hyphens: auto
+    -webkit-hyphens: auto
+    -ms-hyphens: auto
+    hyphens: auto
 
 
 .pl-entry
@@ -22,14 +33,6 @@ body
         background-image: url("../images/de.png")
       &[lang="en"]
         background-image: url("../images/en.png")
-
-h2
-  margin: 0
-  padding: 0
-  margin-bottom: 25px
-  a
-    text-decoration: none
-    letter-spacing: -1px
 
 .bloglinks
 
