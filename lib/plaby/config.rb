@@ -34,6 +34,11 @@ module Plaby
           :url => "https://verhalten.wordpress.com/feed/",
           :image => "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
           :lang  => "de"
+        },
+        "Dalmi Blog" => {
+          url: "http://www.dalmi-blog.de/feed/",
+          image: "http://www.dalmi-blog.de/wp-content/uploads/2014/10/2014-10-04-herbstdummy-03klein-400x271.jpg",
+          lang: "de"
         }
       }
     }
