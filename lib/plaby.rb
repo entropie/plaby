@@ -65,7 +65,7 @@ module Plaby
   end
 
   def self.setup
-    [:css, :javascript, :images].map(&:to_s).each do |m|
+    [:css, :javascript, :images, :feed].map(&:to_s).each do |m|
       FileUtils.mkdir_p(File.join(File.join(Source, htdocs_path, m)), :verbose => self.debug)
       Dir.glob(File.join(TEMPLATE, template, m) + "/*.*").each do |f|
         target = File.join(htdocs_path, File.basename(f))
@@ -97,6 +97,8 @@ module Plaby
   str = Writer.new(f) { |w|
     w.make_digest
     w.make_blogroll
+
+    w.write_feed
   }.to_html
 
 

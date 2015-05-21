@@ -7,7 +7,7 @@ module Plaby
 
   module Writers
 
-    def self.with(obj, const)
+    def self.with(obj, const, &blk)
       obj.extend(TemplateFile).extend(self[const])
     end
 
@@ -40,6 +40,27 @@ module Plaby
 
     module Blogroll
       def template_file; "bloglinks.haml"; end
+    end
+
+    module Rss
+      def to_xml(&blk)
+        xml = Builder::XmlMarkup.new(:indent => 1)
+        xml.rss :version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
+          xml.stylesheet(:type => "text/css", :href => "http://dogitright.de/css/application.css")
+          xml.channel do
+            xml.title Plaby::config[:site_title]
+            xml.description Plaby::config[:subheader]
+            xml.language "en-en"
+            xml.generator "Plaby"
+            xml.link "http://#{Plaby::config[:domain]}/feed/index.xml"
+            xml.pubDate(Time.now.strftime("%a, %d %b %Y %H:%M:%S %z")) #Time.now.rfc2822
+            xml.managingEditor "mictro@gmail.com"
+            xml.webMaster "mictro@gmail.com"
+            yield xml
+          end
+        end
+        xml.target!
+      end
     end
   end
 
@@ -88,6 +109,30 @@ module Plaby
       @content[:blogroll] = str
     end
 
+    def write_feed(what = "index.xml")
+      str = make_feed
+      File.open(File.join(Plaby::config[:htdocs_path], "feed", what), "w+") do |fp|
+        fp.write(str)
+      end
+    end
+
+    def make_feed(n = NumbersOfPosts)
+      posts = @blogs.posts.first(n)
+
+      Writers.with(posts, :rss).to_xml do |xml|
+        posts.each do |bp|
+          xml.item do
+            xml.title bp.title.strip
+            xml.author bp.author
+            xml.link bp.url
+            xml.guid bp.entry_id
+            xml.pubDate bp.published.to_time.rfc2822
+            xml.description bp.summary
+          end
+        end
+      end
+    end
+
     def chain(&blk)
       clear!
       yield self
@@ -99,7 +144,6 @@ module Plaby
     end
 
     def to_html
-
       Writers.with(self, :template).to_html
     end
 

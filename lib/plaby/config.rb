@@ -11,6 +11,7 @@ module Plaby
     attr_accessor :config
 
     Defaults = {
+      domain: "foo.bar",
       site_title: "y mam",
       header: "Planet Dogs",
       subheader: "batz",
