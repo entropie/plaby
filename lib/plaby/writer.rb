@@ -49,8 +49,14 @@ module Plaby
     attr_reader :blogs
 
 
-    def initialize(blogs)
-      @blogs, @html = blogs, template
+    def initialize(blogs, &blk)
+      @blogs = blogs
+      chain(&blk) if block_given?
+      self
+    end
+
+    def clear!
+      @html = template
     end
 
     def template
@@ -68,6 +74,12 @@ module Plaby
     def write_bloglinks
       blog_html = Writers.with(@blogs, :blogroll).to_html
       @html = @html.dup.gsub(/%%%%BLOGLINKS%%%%/, blog_html)
+    end
+
+    def chain(&blk)
+      clear!
+      yield self
+      self
     end
 
     def write(post)
