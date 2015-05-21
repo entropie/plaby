@@ -90,7 +90,6 @@ module Plaby
 
     def chain(&blk)
       clear!
-      pp @content
       yield self
       self
     end

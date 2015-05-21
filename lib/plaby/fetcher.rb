@@ -60,14 +60,16 @@ module Plaby
     end
 
     def get_image
+      local_image_path = File.join(Plaby.htdocs_path, image_path)
       # first try local copy
-      open(Plaby.htdocs_path + "/" + image_path).read
-    rescue
-      # if opening of local copy failed download it and save it as local copy
-      image_file = open(@values[:image]).read
-      open(Plaby.htdocs_path + "/" + image_path,"w") do |f|
-        # write it to local copy
-        f.puts(image_file)
+      if File.exist?(local_image_path)
+        open(Plaby.htdocs_path + "/" + image_path).read
+      else
+        image_file = open(@values[:image]).read
+        open(File.join(Plaby.htdocs_path, image_path), "w+") do |f|
+          f.puts(image_file)
+        end
+        image_file
       end
     end
 

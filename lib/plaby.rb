@@ -12,7 +12,10 @@ require "fileutils"
 
 Bundler.require
 
+
+
 def debug(str)
+  return nil unless Plaby.debug
   $stderr.print "D> "
   $stderr.puts(str)
 end
@@ -37,6 +40,13 @@ module Plaby
 
   NumbersOfPosts = 20
 
+  def self.debug=(obj)
+    @debug = obj
+  end
+
+  def self.debug
+    @debug || false
+  end
 
   def self.T(*frags)
     File.join(TEMPLATE, template, *frags)
@@ -55,19 +65,20 @@ module Plaby
   end
 
   def self.setup
-    # create directories
-    [htdocs_path,'css','images'].each do |dir|
-      begin
-        Dir.mkdir(htdocs_path + "/" + dir)
-      rescue
+    [:css, :javascript, :images].map(&:to_s).each do |m|
+      FileUtils.mkdir_p(File.join(File.join(Source, htdocs_path, m)), :verbose => self.debug)
+      Dir.glob(File.join(TEMPLATE, template, m) + "/*.*").each do |f|
+        target = File.join(htdocs_path, File.basename(f))
+        unless File.exist?(target)
+          FileUtils.cp(f, target, :verbose => self.debug)
+        end
       end
     end
-    # copy files
-    %W'images/de.png images/en.png'.each do |file|
-      source = "#{TEMPLATE}/#{template}/#{file}"
-      FileUtils.cp(source, "#{htdocs_path}/#{file}", :verbose => $debug)
-    end
+
   end
+
+
+  self.debug = true
 
 
   %W'config fetcher writer'.each do |cfg|
