@@ -11,9 +11,10 @@ module Plaby
     attr_accessor :config
 
     Defaults = {
-      planet: "Planet Dogs",
-      bum: "batz",
+      title: "Planet Dogs",
+      subtitle: "batz",
       htdocs_path: 'htdocs',
+      theme: "default",
       blogs: {
         "hundeprofil" => {
           :url => "http://hundeprofil.de/feed/",

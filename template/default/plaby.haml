@@ -10,7 +10,9 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "css/screen.css"}
   %body
     %header.container
-      %h1 Planet Dog Blogs
+      %h1
+        {{{ title }}}
+        %small {{{ subtitle }}}
 
     #content.container
       .row
@@ -19,7 +21,16 @@
 
         %aside.bloglinks.col-md-4
           %nav
-            :plain
-              {{{ blogroll }}}
+            {{{ blogroll }}}
     %footer.container
       Thank you for using - have fun
+
+
+
+
+
+
+
+
+
+

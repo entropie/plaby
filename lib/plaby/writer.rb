@@ -51,13 +51,17 @@ module Plaby
 
     def initialize(blogs, &blk)
       @blogs = blogs
-      @content = {  }
+      clear!
       chain(&blk) if block_given?
       self
     end
 
     def clear!
       @content = {  }
+      [:title, :subtitle].each do |key|
+        @content[key] = Plaby::config[key]
+      end
+      @content
     end
 
     def template
@@ -70,14 +74,12 @@ module Plaby
         m << write(post)
       end
       @content[:posts] = cnt
-      # @html.gsub!(/%%%%CONTENT%%%%/, cnt)
     end
 
     def make_blogroll
-      str = ""
       str = Writers.with(@blogs, :blogroll).to_html
-      # @html.gsub!(/%%%%BLOGLINKS%%%%/, blog_html)
     rescue Errno::ENOENT
+      str = ""
       # templates should be very dynamic and basicially easy to use (and
       # extendable if you feel the need to). There is no need to have
       # a bloglinks file if you dont want the blog roll. So we quietly
@@ -88,6 +90,7 @@ module Plaby
 
     def chain(&blk)
       clear!
+      pp @content
       yield self
       self
     end
@@ -97,6 +100,7 @@ module Plaby
     end
 
     def to_html
+
       Writers.with(self, :template).to_html
     end
 
