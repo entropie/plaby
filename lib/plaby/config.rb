@@ -11,31 +11,31 @@ module Plaby
     attr_accessor :config
 
     Defaults = {
-      :planet => "Planet Dogs",
-      :bum => "batz",
-      :htdocs_path => 'htdocs',
-      :blogs => {
+      planet: "Planet Dogs",
+      bum: "batz",
+      htdocs_path: 'htdocs',
+      blogs: {
         "hundeprofil" => {
-          :url => "http://hundeprofil.de/feed/",
-          :image => "http://www.eva.mpg.de/psycho/staff/marie_nitzschner/images/marie_nitzschner.jpg",
-          :lang  => "de"
+          url: "http://hundeprofil.de/feed/",
+          image: "http://www.eva.mpg.de/psycho/staff/marie_nitzschner/images/marie_nitzschner.jpg",
+          lang: "de"
         },
         "dogzombi" => {
-          :url => "http://dogzombie.blogspot.com/feeds/posts/default?alt=rss",
-          :image => "http://1.bp.blogspot.com/-HQzigzfFDB0/VU5To4ltG4I/AAAAAAAAATU/X_NbmK2oF2c/s1600/german-shepherd-232393_1280.jpg",
-          :lang  => "en"
+          url: "http://dogzombie.blogspot.com/feeds/posts/default?alt=rss",
+          image: "http://1.bp.blogspot.com/-HQzigzfFDB0/VU5To4ltG4I/AAAAAAAAATU/X_NbmK2oF2c/s1600/german-shepherd-232393_1280.jpg",
+          lang: "en"
         },
         "lumpi4" => {
-          :url => "http://www.lumpi4.de/feed/",
-          :image => "http://www.lumpi4.de/wp-content/uploads/2013/07/kolumne.jpg",
-          :lang  => "de"
+          url: "http://www.lumpi4.de/feed/",
+          image: "http://www.lumpi4.de/wp-content/uploads/2013/07/kolumne.jpg",
+          lang: "de"
         },
         "verhalten" => {
-          :url => "https://verhalten.wordpress.com/feed/",
-          :image => "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
-          :lang  => "de"
+          url: "https://verhalten.wordpress.com/feed/",
+          image: "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
+          lang: "de"
         },
-        "Dalmi Blog" => {
+        "dalmi_blog" => {
           url: "http://www.dalmi-blog.de/feed/",
           image: "http://www.dalmi-blog.de/wp-content/uploads/2014/10/2014-10-04-herbstdummy-03klein-400x271.jpg",
           lang: "de"
