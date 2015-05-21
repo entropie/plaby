@@ -101,9 +101,8 @@ module Plaby
     end
 
     def all_posts
-      posts = []
-      each do |c|
-        posts.push(*c.entries)
+      posts = inject([]) do |m,c|
+        m.push(*c.entries)
       end
       posts.sort_by{ |post| post.date }.reverse
     end
