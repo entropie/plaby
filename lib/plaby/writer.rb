@@ -36,7 +36,6 @@ module Plaby
 
     module Entry
       def template_file; "post.haml"; end
-      def template_data; self; end
     end
 
     module Blogroll
