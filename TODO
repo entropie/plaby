@@ -1,3 +1,35 @@
 * downloading blogimages and cache them and crop them
 * change tite by config
 * change header by config
+* rss feed; optional seperated by tags (we have them already, if the blog
+  utilizes them), blogs (think about url/feed/by_tag/a/b/c to have a
+  combined feed or by author ....) that basically means we have to
+  work on a real *dynamic* frontent, but no problem
+* methods to edit config files via the command line, nobody wants to
+  write pure YAML (eg: plaby add blog *url* *title* *image*)
+* binary file with options (for using different config files,
+  different planet systems all handled by the same backend), thats
+  what i think about https://github.com/entropie/backbite/blob/master/bin/backbite
+  (that means basically that you can use things like "plaby update
+  <force|inc|dry>" and so on
+* deamon to start it, define a time frame and just let the application
+  to the job - and yes, we dont want to have any user accessing the
+  app during the write process; no one should see a white page because
+  he accesses the page the wrong time
+* enviroment variable to use different templates;
+  $ TEMPLATE="ollies" ruby lib/plaby.rb
+  should use a different template, so we can test the template system
+  and have two different styles from scratch (at least as long as the
+  binary is not done)
+* we need to figure out how to make a nice archive, where we have to
+  keep in mind that *maybe* a kind of dynamic frontend will be there
+  which is in need to be able to deliver content from the past (what
+  means we have to have some kind of database (that can be entirely
+  filebased) - thats a long term task
+* images defined in the config file as well as the source/author from
+  the post needs to be displayed right next to the post
+* maybe some kind of cache. There are two attributes from every rss
+  post; published date and updated date. there is no need to fetch a
+  post twice if its already cached. very minor (could be solved hand
+  in hand with the image cache)
+
