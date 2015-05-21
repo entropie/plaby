@@ -8,6 +8,7 @@ require "yaml"
 require "pp"
 require "time"
 require "open-uri"
+require "fileutils"
 
 Bundler.require
 
@@ -49,6 +50,22 @@ module Plaby
     @htdocs_path
   end
 
+  def self.setup
+    # create directories
+    [htdocs_path,'css','images'].each do |dir|
+      begin
+        Dir.mkdir(htdocs_path + "/" + dir)
+      rescue
+      end
+    end
+    # copy files
+    %W'images/de.png images/en.png'.each do |file|
+      source = "#{TEMPLATE}/#{DEFAULT_TEMPLATE}/#{file}"
+      FileUtils.cp(source, "#{htdocs_path}/#{file}")
+    end
+
+  end
+
   %W'config fetcher writer'.each do |cfg|
     require "#{Source}/lib/plaby/#{cfg}"
   end
@@ -57,13 +74,14 @@ module Plaby
 
   @htdocs_path = @config.config.has_key?(:htdocs_path) ? @config[:htdocs_path] : HTDOCS
 
-
+  setup
   # TODO: from here on
   f = Fetcher.read(@config[:blogs]).fetch!
   writer = Writer.new(f)
   writer.write_digest
   writer.write_bloglinks
   str = writer.to_html
+
 
   File.open(File.join(@htdocs_path,"index.html"), "w+") do |fp| fp.puts(str) end
   system "cd #{Source} && sass template/default/screen.sass > #{@htdocs_path}/css/screen.css"
