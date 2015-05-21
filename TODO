@@ -32,4 +32,4 @@
   post; published date and updated date. there is no need to fetch a
   post twice if its already cached. very minor (could be solved hand
   in hand with the image cache)
-
+* filter post by language via js (its already in the dom!)
