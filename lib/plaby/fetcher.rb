@@ -9,7 +9,7 @@ module Plaby
   class Blog
 
     attr_reader :identifier, :values
-    attr_reader :title, :link
+    attr_reader :title, :link, :description
 
     attr_accessor :entries
 
@@ -38,6 +38,7 @@ module Plaby
       end
       @title = feed.title
       @link = feed.url
+      @description = feed.description
     end
 
     def inspect
