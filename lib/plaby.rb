@@ -38,7 +38,7 @@ module Plaby
   TEMPLATE = File.join(Source, "template")
   DEFAULT_TEMPLATE = "default"
 
-  NumbersOfPosts = 20
+  NumbersOfPosts = 30
 
   def self.debug=(obj)
     @debug = obj
@@ -68,7 +68,7 @@ module Plaby
     [:css, :javascript, :images, :feed].map(&:to_s).each do |m|
       FileUtils.mkdir_p(File.join(File.join(Source, htdocs_path, m)), :verbose => self.debug)
       Dir.glob(File.join(TEMPLATE, template, m) + "/*.*").each do |f|
-        target = File.join(htdocs_path, File.basename(f))
+        target = File.join(htdocs_path, File.join(m, File.basename(f)))
         unless File.exist?(target)
           FileUtils.cp(f, target, :verbose => self.debug)
         end

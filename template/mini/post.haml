@@ -2,17 +2,38 @@
   .row
     .col-md-5
       .pl-date
-        //%span.lang{:lang => "{{ lang }}"}
         {{ date }}
+      .pl-tagline
+        %ul
+          {{{ tags }}}
     .col-md-4
       %h2.pl-topic{:lang => "{{ lang }}"}
         %a{:href => "{{url}}"} {{ title }}
       .pl-content
+        %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
         %p
-          {{{ summary }}}
+          {{{ text }}}
     .col-md-3
-      .pl-infobox
-        .pl-aimg
+      %aside.pl-infobox
+        .pl-lang{:lang => "{{ lang }}"}
+        %h3.topic
           %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
+            {{{ blog_title }}}
+            %small {{{ description }}}
+  .row
+    .col-md-5
+    .col-md-4
+      .row.well
+        .col-md-3
+          .pl-aimg
+            %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
             %img{:src => "{{blog.image}}"}
+        .col-md-9
+          %h4
+            %a{:href => "{{blog.url}}"}
+              {{{ blog_title }}}
+              %small {{{ description }}}
+    .col-md-2
+          
+        
 

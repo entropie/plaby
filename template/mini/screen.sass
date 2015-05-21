@@ -12,48 +12,51 @@ body
   position: relative
   .pl-aimg
     img
-      max-width: 344px
+      max-width: 72px
+      max-height: 72px
+      border-radius: 10px
   .pl-topic
     letter-spacing: -2px
-  .lang
+  .pl-lang
     opacity: .3
     background-position: right top
     background-repeat: no-repeat
-    color: red
-    height: 16px
-    width: 16px
+    position: absolute
+    top: 33px
+    left: -10px
+    height: 36px
+    width: 36px
     &[lang="de"]
       background-image: url("../images/de.png")
     &[lang="en"]
       background-image: url("../images/en.png")
   .pl-content
   .pl-date
+    letter-spacing: -2px
     color: #DFE6F0
-    text-align: right
     font-size: 30px
     margin-top: 16px
+    text-align: right
+  .pl-tagline
+    text-align: right
+    color: #BFCAD9
+    ul
+      margin-top: 5px
+      list-style-type: none
   .pl-infobox
-    margin-top: 70px
-  &:hover
-    .pl-subtopic
-
-
-  hr
-    height: 30px
-    border-style: solid
-    border-color: black
-    border-width: 1px 0 0 0
-    border-radius: 20px
-    &:before
-      display: block
-      content: ""
-      height: 30px
-      margin-top: -31px
-      border-style: solid
-      border-color: black
-      border-width: 0 0 1px 0
-      border-radius: 20px
-
+    margin-top: 30px
+    font-size: 30px
+    color: #DFE6F0
+    small
+      color: #DFE6F0
+    a
+      color: #DFE6F0
+    .topic
+      padding-left: 20px
+  .pl-bottomline
+    .pl-sidetext
+      float: right
+    .pl-aimg
 
 
 #content

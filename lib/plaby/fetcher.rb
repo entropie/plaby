@@ -40,9 +40,9 @@ module Plaby
       @description = feed.description
     end
 
-    def inspect
-      "#{@identifier}: #{@entries.size}"
-    end
+    # def inspect
+    #   "#{@identifier}: #{@entries.size}"
+    # end
 
     def config
       Plaby.config[:blogs][@identifier]
@@ -91,6 +91,10 @@ module Plaby
         @blog.language
       end
 
+      def description
+        @blog.description
+      end
+
       def author
         @values["author"]
       end
@@ -101,6 +105,10 @@ module Plaby
 
       def title
         @values["title"]
+      end
+
+      def blog_title
+        @blog.title
       end
 
       def url
@@ -115,8 +123,12 @@ module Plaby
         @values["summary"]
       end
 
+      def text
+        @values[:content] || summary
+      end
+
       def tags
-        @tags ||= (@values["categories"] || [])
+        @tags ||= (@values["categories"] || []).map{ |t| "<li>#{t}</li>" }.join
       end
 
       def published

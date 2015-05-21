@@ -30,8 +30,10 @@ module Plaby
         },
         "verhalten" => {
           url: "https://verhalten.wordpress.com/feed/",
-          image: "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
-          lang: "de"
+          image: "https://pbs.twimg.com/profile_images/3077490747/ef34459f9c4ec742a28ffcdff6aec938.jpeg",
+          lang: "de",
+          description: "Behavior Analyst; Skeptic; Blog Verhalten usw. verhalten.wordpress.com on Behavior Analysis and related topics",
+          twitter: "broede"
         },
         "dalmi_blog" => {
           url: "http://www.dalmi-blog.de/feed/",
@@ -43,11 +45,6 @@ module Plaby
           :image => "http://cavecani.de/wp-content/themes/CaveCani_html5Boilerplate/images/header_logo.png",
           :lang  => "de"
         }
-        # "verhalten" => {
-        #   :url => "https://verhalten.wordpress.com/feed/",
-        #   :image => "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
-        #   :lang  => "de"
-        # }
       }
     }
 
