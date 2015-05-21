@@ -33,7 +33,7 @@ module Plaby
 
 
   TEMPLATE = File.join(Source, "template")
-  DEFAULT_TEMPLATE = "default"
+  DEFAULT_TEMPLATE = ENV["TEMPLATE"] || "default"
 
   NumbersOfPosts = 20
 
@@ -86,7 +86,7 @@ module Plaby
 
 
   File.open(File.join(@htdocs_path,"index.html"), "w+") do |fp| fp.puts(str) end
-  system "cd #{Source} && sass template/default/screen.sass > #{@htdocs_path}/css/screen.css"
+  system "cd #{Source} && sass template/#{DEFAULT_TEMPLATE}/screen.sass > #{@htdocs_path}/css/screen.css"
 
 end
 

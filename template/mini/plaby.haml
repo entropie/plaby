@@ -9,18 +9,21 @@
     %link{:rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"}
     %link{:rel => "stylesheet", :type => "text/css", :href => "css/screen.css"}
   %body
-    %header.container
-      %h1 Planet Dog Blogs
+    %header.container-fluid
+      // %h1
+      //   Planet Dog
+      //   %small Wof! Wof!
 
-    #content.container
+
+
+    //#pdog
+    #content.container-fluid
       .row
-        .col-md-8
+        .col-md-12
           :plain
             %%%%CONTENT%%%%
 
-        %aside.bloglinks.col-md-4
-          %nav
-            :plain
-              %%%%BLOGLINKS%%%%
-    %footer.container
-      Thank you for using - have fun
+    %footer.container-fluid
+      .row
+        .col-md-12
+          Thank you for using - have fun

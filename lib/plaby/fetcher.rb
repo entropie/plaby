@@ -113,6 +113,10 @@ module Plaby
         @values["summary"]
       end
 
+      def tags
+        @tags ||= (@values["categories"] || [])
+      end
+
       def published
         @values.published.to_time
       end
