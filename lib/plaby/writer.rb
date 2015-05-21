@@ -58,7 +58,7 @@ module Plaby
 
     def clear!
       @content = {  }
-      [:title, :subtitle].each do |key|
+      [:site_title, :header, :subheader].each do |key|
         @content[key] = Plaby::config[key]
       end
       @content

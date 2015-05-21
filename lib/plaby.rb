@@ -33,13 +33,13 @@ module Plaby
 
 
   TEMPLATE = File.join(Source, "template")
-  DEFAULT_TEMPLATE = ENV["TEMPLATE"] || "default"
+  DEFAULT_TEMPLATE = "default"
 
   NumbersOfPosts = 20
 
 
   def self.T(*frags)
-    File.join(TEMPLATE, DEFAULT_TEMPLATE, *frags)
+    File.join(TEMPLATE, template, *frags)
   end
 
   def self.config
@@ -48,6 +48,10 @@ module Plaby
 
   def self.htdocs_path
     @htdocs_path
+  end
+
+  def self.template
+    ENV["TEMPLATE"] || config[:template] || DEFAULT_TEMPLATE
   end
 
   def self.setup
@@ -60,7 +64,7 @@ module Plaby
     end
     # copy files
     %W'images/de.png images/en.png'.each do |file|
-      source = "#{TEMPLATE}/#{DEFAULT_TEMPLATE}/#{file}"
+      source = "#{TEMPLATE}/#{template}/#{file}"
       FileUtils.cp(source, "#{htdocs_path}/#{file}", :verbose => $debug)
     end
   end
@@ -86,7 +90,7 @@ module Plaby
 
 
   File.open(File.join(@htdocs_path,"index.html"), "w+") do |fp| fp.puts(str) end
-  system "cd #{Source} && sass template/#{DEFAULT_TEMPLATE}/screen.sass > #{@htdocs_path}/css/screen.css"
+  system "cd #{Source} && sass #{TEMPLATE}/#{template}/screen.sass > #{@htdocs_path}/css/screen.css"
 
 end
 
