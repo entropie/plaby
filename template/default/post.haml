@@ -1,12 +1,22 @@
 .pl-entry{:lang => "{{ lang }}"}
-  .pl-box.panel.panel-default
-    .panel-heading
+  .row
+    .col-md-3
       .pl-date.popover.left
         .arrow
         .popover-title {{ date }}
+        .popover-content
+          .media
+            .media-left
+              %img{:src => "{{blog.image}}", :width => "50", :height => "50"}
+            .media-body
+              %a{:href => "{{blog.url}}"}
+                {{ blog.title }}
 
-      %h2.pl-topic.panel-title
-        .lang{:lang => "{{ lang }}"}
-        %a{:href => "{{url}}"} {{ title }}
-    .panel-body
-      .pl-content {{{ summary }}}
+    .col-md-9
+      .pl-box.panel.panel-default
+        .panel-heading
+          %h2.pl-topic.panel-title
+            .lang{:lang => "{{ lang }}"}
+            %a{:href => "{{url}}"} {{ title }}
+        .panel-body
+          .pl-content {{{ summary }}}

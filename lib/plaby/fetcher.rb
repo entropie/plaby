@@ -58,6 +58,10 @@ module Plaby
         @values = hsh
       end
 
+      def blog
+        @blog
+      end
+
       def lang
         @blog.language
       end
