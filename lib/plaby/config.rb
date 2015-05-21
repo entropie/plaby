@@ -18,7 +18,7 @@ module Plaby
         "hundeprofil" => {
           :url => "http://hundeprofil.de/feed/",
           :image => "http://www.eva.mpg.de/psycho/staff/marie_nitzschner/images/marie_nitzschner.jpg",
-          :lang  => "de"
+          :lang  => "de",
         },
         "dogzombi" => {
           :url => "http://dogzombie.blogspot.com/feeds/posts/default?alt=rss",
@@ -30,11 +30,16 @@ module Plaby
           :image => "http://www.lumpi4.de/wp-content/uploads/2013/07/kolumne.jpg",
           :lang  => "de"
         },
-        "verhalten" => {
-          :url => "https://verhalten.wordpress.com/feed/",
-          :image => "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
+        "cavecani" => {
+          :url => "http://cavecani.de/wissenswertes/feed/",
+          :image => "http://cavecani.de/wp-content/themes/CaveCani_html5Boilerplate/images/header_logo.png",
           :lang  => "de"
         }
+        # "verhalten" => {
+        #   :url => "https://verhalten.wordpress.com/feed/",
+        #   :image => "https://verhalten.files.wordpress.com/2013/01/cropped-labwork2.jpg",
+        #   :lang  => "de"
+        # }
       }
     }
 

@@ -1,0 +1,18 @@
+%article.container-fluid.pl-entry{:lang => "{{ lang }}"}
+  .row
+    .col-md-5
+      .pl-date
+        //%span.lang{:lang => "{{ lang }}"}
+        {{ date }}
+    .col-md-4
+      %h2.pl-topic{:lang => "{{ lang }}"}
+        %a{:href => "{{url}}"} {{ title }}
+      .pl-content
+        %p
+          {{{ summary }}}
+    .col-md-3
+      .pl-infobox
+        .pl-aimg
+          %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
+            %img{:src => "{{blog.image}}"}
+
