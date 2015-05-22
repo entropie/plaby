@@ -3,7 +3,7 @@
     .col-md-3
       .pl-date.popover.left
         .arrow
-        .popover-title {{ date }}
+        .popover-title {{{ date }}}
         .popover-content
           .media
             .media-left
@@ -19,4 +19,4 @@
             .lang{:lang => "{{ lang }}"}
             %a{:href => "{{url}}"} {{ title }}
         .panel-body
-          .pl-content {{{ summary }}}
+          .pl-content {{{ text }}}

@@ -46,7 +46,7 @@ module Plaby
       def to_xml(&blk)
         xml = Builder::XmlMarkup.new(:indent => 1)
         xml.rss :version => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
-          xml.stylesheet(:type => "text/css", :href => "http://dogitright.de/css/application.css")
+          xml.stylesheet(:type => "text/css", :href => "http://#{Plaby::config[:domain]}/css/style.css")
           xml.channel do
             xml.title Plaby::config[:site_title]
             xml.description Plaby::config[:subheader]

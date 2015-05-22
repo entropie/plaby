@@ -43,7 +43,8 @@ module Plaby
         "cavecani" => {
           :url => "http://cavecani.de/wissenswertes/feed/",
           :image => "http://cavecani.de/wp-content/themes/CaveCani_html5Boilerplate/images/header_logo.png",
-          :lang  => "de"
+          :lang  => "de",
+          :twitter => "CaveCani"
         }
       }
     }

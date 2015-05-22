@@ -136,7 +136,7 @@ module Plaby
       end
 
       def date
-        @values.published.to_time.strftime("%A, %e%b%Y")
+        @values.published.to_time.strftime("%A, <strong>%e%b%Y</strong>")
       end
     end
   end
