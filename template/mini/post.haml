@@ -1,6 +1,6 @@
 %article.container-fluid.pl-entry{:lang => "{{ lang }}"}
   .row
-    .col-md-3
+    .col-md-3.hidden-xs
       .pl-date
         {{{ date }}}
       .pl-tagline
@@ -14,7 +14,7 @@
         %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
         %p
           {{{ text }}}
-    .col-md-3
+    .col-md-3.hidden-xs
       %aside.pl-infobox
         .pl-lang{:lang => "{{ lang }}"}
         %h3.topic
