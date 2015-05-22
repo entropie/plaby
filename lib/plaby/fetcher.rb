@@ -60,7 +60,7 @@ module Plaby
         open(local_image_path).read
       else
         image_file = open(@values[:image]).read
-        open(File.join(Plaby.htdocs_path, image_path), "w+") do |f|
+        open(local_image_path, "w+") do |f|
           f.write(image_file)
         end
         image_file
