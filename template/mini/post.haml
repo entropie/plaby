@@ -10,6 +10,9 @@
     .col-md-5
       %h2.pl-topic{:lang => "{{ lang }}"}
         %a{:href => "{{url}}"} {{ title }}
+      .pl-mobile-sub.visible-xs
+        By {{ author }} at
+        %a{:href => "{{url}}"} {{{ date }}}
       .pl-content
         %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
         %p
@@ -21,20 +24,20 @@
           %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
             %strong {{{ blog_title }}}
             %small {{{ description }}}
-  // .row
-  //   .col-md-4
-  //   .col-md-5
-  //     .row.well
-  //       .col-md-3
-  //         .pl-aimg
-  //           %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
-  //           %img{:src => "{{blog.image}}"}
-  //       .col-md-9
-  //         %h4
-  //           %a{:href => "{{blog.url}}"}
-  //             {{{ blog_title }}}
-  //             %small {{{ description }}}
-  //   .col-md-3
+  .row.visible-xs
+    .col-md-4
+    .col-md-5
+      .row.well
+        .col-md-3
+          .pl-aimg
+            %a{:href => "{{blog.url}}", :title => "{{blog.title}}"}
+            %img{:src => "{{blog.image}}"}
+        .col-md-9
+          %h4
+            %a{:href => "{{blog.url}}"}
+              {{{ blog_title }}}
+              %small {{{ description }}}
+    .col-md-3
           
         
 
