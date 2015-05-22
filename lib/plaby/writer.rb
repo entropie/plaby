@@ -69,7 +69,6 @@ module Plaby
 
     attr_reader :blogs, :content
 
-
     def initialize(blogs, &blk)
       @blogs = blogs
       clear!
@@ -101,10 +100,6 @@ module Plaby
       str = Writers.with(@blogs, :blogroll).to_html
     rescue Errno::ENOENT
       str = ""
-      # templates should be very dynamic and basicially easy to use (and
-      # extendable if you feel the need to). There is no need to have
-      # a bloglinks file if you dont want the blog roll. So we quietly
-      # remove the placeholder if there is no file.
     ensure
       @content[:blogroll] = str
     end

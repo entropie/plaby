@@ -40,10 +40,6 @@ module Plaby
       @description = feed.description
     end
 
-    # def inspect
-    #   "#{@identifier}: #{@entries.size}"
-    # end
-
     def config
       Plaby.config[:blogs][@identifier]
     end
@@ -51,8 +47,6 @@ module Plaby
     def language
       config[:lang]
     end
-
-    protected
 
     def image_path
       title_slug = @identifier.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
@@ -63,11 +57,11 @@ module Plaby
       local_image_path = File.join(Plaby.htdocs_path, image_path)
       # first try local copy
       if File.exist?(local_image_path)
-        open(Plaby.htdocs_path + "/" + image_path).read
+        open(local_image_path).read
       else
         image_file = open(@values[:image]).read
         open(File.join(Plaby.htdocs_path, image_path), "w+") do |f|
-          f.puts(image_file)
+          f.write(image_file)
         end
         image_file
       end
