@@ -67,7 +67,7 @@ module Plaby
   def self.setup
     [:css, :javascript, :images, :feed].map(&:to_s).each do |m|
       # create directories
-      directory = File.join(htdocs_path, m)
+      directory = File.join(File.join(Source, htdocs_path, m))
       FileUtils.mkdir_p(directory, :verbose => self.debug) unless File.exist?(directory)
       Dir.glob(File.join(TEMPLATE, template, m) + "/*.*").each do |f|
         target = File.join(htdocs_path, m, File.basename(f))
