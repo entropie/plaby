@@ -31,7 +31,10 @@ module Plaby
 
     def read
       @entries = Entries.new
-      feed =  Feedjira::Feed.fetch_and_parse(url)
+
+      xml = HTTParty.get(url).body
+      feed =  Feedjira.parse(xml)
+
       feed.entries.each do |a|
         @entries << Entry.new(self, a)
       end
@@ -59,12 +62,14 @@ module Plaby
       if File.exist?(local_image_path)
         open(local_image_path).read
       else
+
         image_file = open(@values[:image]).read
         open(local_image_path, "w+") do |f|
           f.write(image_file)
         end
         image_file
       end
+    rescue # also no local image
     end
 
 

@@ -1,5 +1,6 @@
 source :rubygems
 
+gem "httparty"
 gem "feedjira"
 gem "string_helpers"
 gem "haml"

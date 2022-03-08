@@ -20,6 +20,16 @@ def debug(str)
   $stderr.puts(str)
 end
 
+def error(str)
+  return nil unless Plaby.debug
+  $stderr.print "E> "
+  $stderr.puts(str)
+end
+
+
+
+
+
 module Plaby
 
   VERSION = [0, 0, 1]
