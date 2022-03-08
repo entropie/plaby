@@ -127,7 +127,7 @@ module Plaby
       end
 
       def text
-        @values[:content] || summary
+        @values["content"] || summary
       end
 
       def tags
