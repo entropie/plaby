@@ -29,6 +29,12 @@ module Plaby
           lang: "de",
           twitter: "broede"
         },
+        "fluffology" => {
+          url: "http://xeno:2308/feed/",
+          image: "https://farm2.staticflickr.com/1825/29344213768_c21f4e9f03_z.jpg",
+          lang: "de",
+          twitter: "fluffology"
+        },
       }
     }
 
