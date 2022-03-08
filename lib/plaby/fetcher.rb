@@ -6,6 +6,26 @@
 
 module Plaby
 
+  module Escaper
+    def self.unescape_xml(input)
+      input.gsub(/&(#([0-9]{2,4})|#[xX]([0-9a-fA-F]{2,4})|quot|apos|lt|gt|amp);/) do |s|
+        case s
+        when '&quot;';  '"'       # replace &quot; with "
+        when '&apos;';  "'"       # replace &apos; with '
+        when '&lt;'  ;  '<'       # replace &lt;   with <
+        when '&gt;'  ;  '>'       # replace &gt;   with >
+        when '&amp;' ;  '&'       # replace &amp;  with &
+        else
+          # convert unicode code point (decimal or hexadecimal) to a char
+          hexa_flag = $1.start_with?('#x')
+          unicode_number = hexa_flag ? $3.to_i(16) : $2.to_i
+          unicode_number.chr(Encoding::UTF_8)
+        end
+      end
+    end
+  end
+
+
   class Blog
 
     attr_reader :identifier, :values, :title, :link, :description
@@ -42,7 +62,7 @@ module Plaby
         debug "    post> entry: %s" % [read_entry.title]
         @entries << read_entry
       end
-      @title = feed.title
+      @title = Escaper.unescape_xml(feed.title)
       @link = feed.url
       @description = feed.description
     end
