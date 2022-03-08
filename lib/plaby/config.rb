@@ -35,11 +35,6 @@ module Plaby
           description: "Behavior Analyst; Skeptic; Blog Verhalten usw. verhalten.wordpress.com on Behavior Analysis and related topics",
           twitter: "broede"
         },
-        "dalmi_blog" => {
-          url: "http://www.dalmi-blog.de/feed/",
-          image: "http://www.dalmi-blog.de/wp-content/uploads/2014/10/2014-10-04-herbstdummy-03klein-400x271.jpg",
-          lang: "de"
-        },
       }
     }
 
