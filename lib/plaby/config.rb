@@ -20,7 +20,7 @@ module Plaby
       blogs: {
         "hundeprofil" => {
           :url => "http://hundeprofil.de/feed/",
-          :image => "http://www.eva.mpg.de/psycho/staff/marie_nitzschner/images/marie_nitzschner.jpg",
+          :image => "https://kynologisch.net/wp-content/uploads/2015/05/marie-offiziell-300x300.jpg",
           :lang  => "de",
         },
         "dogzombi" => {
@@ -30,7 +30,7 @@ module Plaby
         },
         "verhalten" => {
           url: "https://verhalten.wordpress.com/feed/",
-          image: "https://pbs.twimg.com/profile_images/3077490747/ef34459f9c4ec742a28ffcdff6aec938.jpeg",
+          image: "https://secure.gravatar.com/avatar/67a17dc80e08cbf0b080cce4a5b7cc94",
           lang: "de",
           description: "Behavior Analyst; Skeptic; Blog Verhalten usw. verhalten.wordpress.com on Behavior Analysis and related topics",
           twitter: "broede"
@@ -39,7 +39,7 @@ module Plaby
           url: "http://www.dalmi-blog.de/feed/",
           image: "http://www.dalmi-blog.de/wp-content/uploads/2014/10/2014-10-04-herbstdummy-03klein-400x271.jpg",
           lang: "de"
-        }
+        },
       }
     }
 
