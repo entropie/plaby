@@ -35,8 +35,12 @@ module Plaby
       xml = HTTParty.get(url).body
       feed =  Feedjira.parse(xml)
 
+      debug "  read> %s (%s)" % [feed.title, feed.url]
+
       feed.entries.each do |a|
-        @entries << Entry.new(self, a)
+        read_entry = Entry.new(self, a)
+        debug "    post> entry: %s" % [read_entry.title]
+        @entries << read_entry
       end
       @title = feed.title
       @link = feed.url
