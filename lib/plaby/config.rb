@@ -23,11 +23,6 @@ module Plaby
           :image => "https://kynologisch.net/wp-content/uploads/2015/05/marie-offiziell-300x300.jpg",
           :lang  => "de",
         },
-        "dogzombi" => {
-          url: "http://dogzombie.blogspot.com/feeds/posts/default?alt=rss",
-          image: "http://1.bp.blogspot.com/-HQzigzfFDB0/VU5To4ltG4I/AAAAAAAAATU/X_NbmK2oF2c/s1600/german-shepherd-232393_1280.jpg",
-          lang: "en"
-        },
         "verhalten" => {
           url: "https://verhalten.wordpress.com/feed/",
           image: "https://secure.gravatar.com/avatar/67a17dc80e08cbf0b080cce4a5b7cc94",
