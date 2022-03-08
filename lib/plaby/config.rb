@@ -27,7 +27,6 @@ module Plaby
           url: "https://verhalten.wordpress.com/feed/",
           image: "https://secure.gravatar.com/avatar/67a17dc80e08cbf0b080cce4a5b7cc94",
           lang: "de",
-          description: "Behavior Analyst; Skeptic; Blog Verhalten usw. verhalten.wordpress.com on Behavior Analysis and related topics",
           twitter: "broede"
         },
       }
